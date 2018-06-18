@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_manualcontrol"
+        android:orderInCategory="100"
+        android:title="Manual control"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_linefollower"
+        android:orderInCategory="100"
+        android:title="Line follower"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_distanceeneable"
+        android:orderInCategory="100"
+        android:title="Enable distance stop"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_distancedisable"
+        android:orderInCategory="100"
+        android:title="Disable distance stop"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_shutdown"
+        android:orderInCategory="100"
+        android:title="Shutdown robot"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_reboot"
+        android:orderInCategory="100"
+        android:title="Reboot robot"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:title="About"
+        app:showAsAction="never" />
+
+</menu>
