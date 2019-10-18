@@ -19,7 +19,14 @@ import java.net.URL
 import android.os.AsyncTask
 
 class ButtonsControlActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+    var buttonCL = false
+    var buttonCR = false
+    var buttonBW = false
+    var buttonFW = false
+    var buttonFR = false
+    var buttonFL = false
+    var buttonBL = false
+    var buttonBR = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buttons_control)
@@ -30,6 +37,14 @@ class ButtonsControlActivity : AppCompatActivity(), NavigationView.OnNavigationI
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         button8.setOnTouchListener { v: View, m: MotionEvent ->
+            buttonCL = false
+            buttonCR = false
+            buttonBL = false
+            buttonBR = false
+            buttonFW = false
+            buttonBW = false
+            buttonFL = false
+            buttonFR = false
             sendRequest("sa")
             true
         }
@@ -73,20 +88,123 @@ class ButtonsControlActivity : AppCompatActivity(), NavigationView.OnNavigationI
     }
 
     fun handleTouch(m: MotionEvent, f: String) {
-        if (m.actionMasked.equals(0))
+        if (m.actionMasked == 0)
         {
+            if (f == "cl")
+            {
+                buttonCL = true
+            }
+            if (f == "cr")
+            {
+                buttonCR = true
+            }
+            if (f == "bl")
+            {
+                buttonBL = true
+            }
+            if (f == "br")
+            {
+                buttonBR = true
+            }
+            if (f == "fw")
+            {
+                buttonFW = true
+            }
+            if (f == "bw")
+            {
+                buttonBW = true
+            }
+            if (f == "fl")
+            {
+                buttonFL = true
+            }
+            if (f == "fr")
+            {
+                buttonFR = true
+            }
             sendRequest(f)
         }
-        if (m.actionMasked.equals(1))
+        if (m.actionMasked == 1)
         {
-            sendRequest("sa")
+            if (f == "cl")
+            {
+                buttonCL = false
+            }
+            if (f == "cr")
+            {
+                buttonCR = false
+            }
+            if (f == "bl")
+            {
+                buttonBL = false
+            }
+            if (f == "br")
+            {
+                buttonBR = false
+            }
+            if (f == "fw")
+            {
+                buttonFW = false
+            }
+            if (f == "bw")
+            {
+                buttonBW = false
+            }
+            if (f == "fl")
+            {
+                buttonFL = false
+            }
+            if (f == "fr")
+            {
+                buttonFR = false
+            }
+            handleButtons(f)
         }
     }
 
     fun sendRequest(f: String)
     {
         sendRequestTask().execute(editText2.text.toString() + "/" + f)
+    }
 
+    fun handleButtons(b: String)
+    {
+        if (buttonCL)
+        {
+            sendRequest("cl")
+        }
+        else if (buttonCR)
+        {
+            sendRequest("cr")
+        }
+        else if (buttonBW)
+        {
+            sendRequest("bw")
+        }
+        else if (buttonFW)
+        {
+            sendRequest("fw")
+        }
+        else if (buttonFR)
+        {
+            sendRequest("fr")
+        }
+        else if (buttonFL)
+        {
+            sendRequest("fl")
+        }
+        else if (buttonBL)
+        {
+            sendRequest("bl")
+        }
+        else if (buttonBR)
+        {
+            sendRequest("br")
+        }
+        else
+        {
+            sendRequest("sa")
+        }
     }
 
     override fun onBackPressed() {
@@ -160,11 +278,11 @@ class ButtonsControlActivity : AppCompatActivity(), NavigationView.OnNavigationI
 class sendRequestTask() : AsyncTask<String, Void, String>() {
     override fun doInBackground(vararg url: String): String? {
         try {
-            val url = URL(url[0])
-            val urlConnection = url.openConnection() as HttpURLConnection
-            val data = urlConnection.inputStream.bufferedReader().readText()
+            val urlConnection = URL(url[0]).openConnection() as HttpURLConnection
+            urlConnection.setConnectTimeout(300)
+            urlConnection.inputStream.bufferedReader()
             urlConnection.disconnect()
-            return data
+            return ""
         }
         catch (e: Exception)
         {
